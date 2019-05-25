@@ -13,20 +13,20 @@
 
 typedef struct Chip8
 {
-  unsigned short instructionRegister;
   unsigned char* memory;
   unsigned char registers[NUM_REGISTERS];
   unsigned short I;
   unsigned short pc;
   unsigned char* gfx;
-  unsigned char delay_timer;
-  unsigned char sound_timer;
+  unsigned char delayTimer;
+  unsigned char soundTimer;
   unsigned short stack[STACK_SIZE];
   unsigned short sp;
-  unsigned char key[KEYPAD_SIZE];
+  unsigned char keys[KEYPAD_SIZE];
   View* view;
 
   bool drawFlag;
+  void (*onSoundTimer)();
 } Chip8;
 
 Chip8* newChip8();

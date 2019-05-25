@@ -14,12 +14,12 @@
 
 # project name (generate executable with this name)
 TARGET   = chip8Run
-
 CC       = gcc
+DEBUG_LIBRARY = usr/lib/debug
 
-#LINKER   = gcc
+LINKER   = gcc
 # linking flags here
-#LFLAGS   = -Wall -I. -lm
+LFLAGS   =
 
 # change these to proper directories where each file should be
 SRCDIR   = src
@@ -38,6 +38,7 @@ rm       = rm -f
 all: $(BINDIR)/$(TARGET)
 
 debug: CFLAGS += -g
+debug: LFLAGS += -L/$(DEBUG_LIBRARY)
 debug: $(BINDIR)/$(TARGET)
 
 $(BINDIR)/$(TARGET): $(OBJECTS)
@@ -45,7 +46,7 @@ $(BINDIR)/$(TARGET): $(OBJECTS)
 	@echo "Linking complete!"
 
 $(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.c
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(LINKER) $(LFLAGS)  $(CFLAGS) -c $< -o $@
 	@echo "Compiled "$<" successfully!"
 
 .PHONY: clean

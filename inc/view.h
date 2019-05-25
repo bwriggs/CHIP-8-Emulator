@@ -2,7 +2,9 @@
 #define __VIEW_H__
 
 #include "SDL2/SDL.h"
+#include "viewCycleData.h"
 #include <stdbool.h>
+
 typedef struct
 {
   SDL_Window* window;
@@ -11,8 +13,8 @@ typedef struct
 
 View* newView();
 void viewUpdate(View* view, unsigned char* gfx);
-void viewSetKeys(View* view, unsigned char keys[]);
+void viewEmulateCycle(ViewCycleData* viewCycleData);
 void viewDestroy(View* view);
-void viewHandleEvents(bool* quit);
+void viewAwaitKeyPress(unsigned char* keys);
 
 #endif
